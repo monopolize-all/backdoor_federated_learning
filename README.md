@@ -14,10 +14,11 @@ Updates made via fork:
 git clone https://github.com/monopolize-all/backdoor_federated_learning.git
 cd backdoor_federated_learning
 ```
-2) Make a new venv and activate it
+2) Make a new venv and activate it, also installing all required libraries
 ```
 python3.7 -m venv venv
 source venv/bin/activate
+pip install -r requirements.txt -f https://download.pytorch.org/whl/torch_stable.html
 ```
 3) Start visdom server and specify port
 ```
