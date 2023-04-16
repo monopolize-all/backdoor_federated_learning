@@ -26,13 +26,9 @@ visdom -port 8097
 ```
 4) Run poisoning on pretrained model (Requires new terminal window with venv activated as visdom needs to be kept running.)
 ```
-visdom -port 8097
-```
-
-To run posioning:
-```
 python training.py --params utils/img_class_continue.yaml
 ```
+5) Open http://localhost:8097 in a web browser to see live accuracy results as model gets trained.
 
 
 # Credits
