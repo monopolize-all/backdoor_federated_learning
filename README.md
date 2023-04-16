@@ -34,6 +34,7 @@ python training.py --params utils/img_class_continue.yaml
 ```
 
 
-Credits go to eugene@cs.cornell.edu as code has been originally provided by him.
+# Credits
+Credits go to eugene@cs.cornell.edu as code has been originally provided by him. All I did was make it compatible with newer pytorch versions and also provide a pretrained model for Backdoor attacks on Image Classification.
 
 This code includes experiments for paper "How to Backdoor Federated Learning" (https://arxiv.org/abs/1807.00459)
