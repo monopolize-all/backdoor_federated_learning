@@ -18,6 +18,10 @@ class SimpleNet(nn.Module):
 
 
     def visualize(self, vis, epoch, acc, loss=None, eid='main', is_poisoned=False, name=None):
+
+        if hasattr(acc, 'cpu'): 
+            acc = acc.cpu().detach().numpy()
+
         if name is None:
             name = self.name + '_poisoned' if is_poisoned else self.name
         vis.line(X=np.array([epoch]), Y=np.array([acc]), name=name, win='vacc_{0}'.format(self.created_time), env=eid,
@@ -36,7 +40,12 @@ class SimpleNet(nn.Module):
 
     def train_vis(self, vis, epoch, data_len, batch, loss, eid='main', name=None, win='vtrain'):
 
-        vis.line(X=np.array([(epoch-1)*data_len+batch]), Y=np.array([loss]),
+        if hasattr(loss, 'cpu'):
+            loss_val = loss.cpu()
+        else:
+            loss_val = loss
+
+        vis.line(X=np.array([(epoch-1)*data_len+batch]), Y=np.array([loss_val]),
                                  env=eid,
                                  name=f'{name}' if name is not None else self.name, win=f'{win}_{self.created_time}',
                                  update='append' if vis.win_exists(f'{win}_{self.created_time}', env=eid) else None,

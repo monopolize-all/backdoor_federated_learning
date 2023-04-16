@@ -374,8 +374,8 @@ def train(helper, epoch, train_data_sets, local_model, target_model, is_poison, 
 
                     total_loss += loss.data
 
-                    if helper.params["report_train_loss"] and batch % helper.params[
-                        'log_interval'] == 0 and batch > 0:
+                    if helper.params["report_train_loss"] and batch_id % helper.params[
+                        'log_interval'] == 0 and batch_id > 0:
                         cur_loss = total_loss.item() / helper.params['log_interval']
                         elapsed = time.time() - start_time
                         logger.info('model {} | epoch {:3d} | internal_epoch {:3d} '
@@ -395,7 +395,7 @@ def train(helper, epoch, train_data_sets, local_model, target_model, is_poison, 
                 # we can calculate distance to this model now.
                 distance_to_global_model = helper.model_dist_norm(model, target_params_variables)
                 logger.info(
-                    f'MODEL {model_id}. P-norm is {helper.model_global_norm(model):.4f}. '
+                    #f'MODEL {model_id}. P-norm is {helper.model_global_norm(model):.4f}. '
                     f'Distance to the global model: {distance_to_global_model:.4f}. '
                     f'Dataset size: {train_data.size(0)}')
                 vis.line(Y=np.array([distance_to_global_model]), X=np.array([epoch]),
@@ -587,7 +587,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     with open(f'./{args.params}', 'r') as f:
-        params_loaded = yaml.load(f)
+        params_loaded = yaml.safe_load(f)
     current_time = datetime.datetime.now().strftime('%b.%d_%H.%M.%S')
     if params_loaded['type'] == "image":
         helper = ImageHelper(current_time=current_time, params=params_loaded,

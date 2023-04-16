@@ -1,5 +1,5 @@
-torch==1.0
+torch==1.7.1+cu110
 visdom
 PyYAML
-torchvision
+torchvision==0.8.2+cu110
 tqdm
